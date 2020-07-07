@@ -5,8 +5,8 @@ This lab is the practice jQuery Selectors and Events
 Number and name of feature: 1. Display Images
 Estimate of time needed to complete:45 Minutes
 Start time: 2:00
-Finish time: 
-Actual time needed to complete: 
+Finish time: 2:55
+Actual time needed to complete: 55 minutes
 
 Number and name of feature: 2. Filter Images
 Estimate of time needed to complete:45 Minutes
