@@ -6,6 +6,8 @@ $.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
       new Animal(animalObject).gallery();
       new Animal(animalObject).list();
     })
+    // .then(Animals.galleryBuilder)
+    //Chance assisted with this
   })
 function Animal(object){
   this.name = object.keyword;
@@ -26,6 +28,7 @@ Animal.prototype.gallery = function(){
 }
 Animal.prototype.list = function(){
 //https://stackoverflow.com/questions/2822962/jquery-remove-duplicate-elements
+//Collabed with Tia and David
   let seen = {};
   $('option').each(function(){
     let txt = $(this).text();
@@ -35,11 +38,18 @@ Animal.prototype.list = function(){
       seen[txt] = true;
   });
 
-  const $options = $(`<option>${this.name}</option>`);
+  const $options = $(`<option value="${this.name}">${this.name}</option>`);
   $('select').append($options);
 }
 
-// $('option').on('select', selectHandler)
+Animal.prototype.galleryBuilder = function(){
+
+  // $('option').on('select', selectHandler)
+  // $(this).val()
+  // if val === animals.name
+
+}
+
 // function selectHandler (event){
 // };
 
