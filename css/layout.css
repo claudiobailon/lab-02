@@ -1,0 +1,18 @@
+body {
+  width: 480px;
+  font-family: 'Fondamento', cursive;
+  margin: 60px auto;
+}
+header {
+  height: 150px;
+}
+main {
+  overflow: hidden;
+}
+section {
+  width: 225px;
+  height: 320px;
+  display: inline-block;
+  margin: auto 5px;
+  overflow: hidden;
+}

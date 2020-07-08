@@ -1,0 +1,18 @@
+body {
+  background-color: lightgray;
+}
+header h1 {
+  font-size: 2em;
+}
+main section:first-child {
+  display: none;
+}
+section h2 {
+  margin: 0 0 20px;
+  text-transform: uppercase;
+  font-size: 1.3em;
+}
+section img {
+  width: 200px;
+  height: 200px;
+}

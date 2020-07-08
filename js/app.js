@@ -1,14 +1,39 @@
 'use strict';
-
+//global array each animal pushed into
+//foreach on colllection
 $.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
   .then(data => {
-    data.forEach( animalObject => {
+    data.forEach(animalObject => {
       new Animal(animalObject).gallery();
       new Animal(animalObject).list();
+      // Animal.galleryBuilder;
     })
-    // .then(Animals.galleryBuilder)
-    //Chance assisted with this
+    //event listener
+    $('select').on('change', function(){
+      $('section').hide();
+      $('section').each((index, element) => {
+        if (this.value === $(element).attr('data-keyword')){
+          $(element).show();
+        }
+        else if (this.value === 'default'){
+          $('section').show();
+          $('main section:first-child').css('display','none');
+        }
+      });
+      
+      // data.forEach(animalObject => {
+      //   if (animalObject.val() === selectedItem)
+      // })
+    });
   })
+  // Animal.galleryBuilder;
+  // .then(data => {
+  //   var animal = new Animal;
+    
+  // });
+    //Chance assisted with this
+
+// constructor function
 function Animal(object){
   this.name = object.keyword;
   this.image = object.image_url;
@@ -16,7 +41,7 @@ function Animal(object){
   this.hornCount = object.horns;
   this.title = object.title;
 }
-
+//constructor prototype
 Animal.prototype.gallery = function(){
   const myTemplate = $('#photo-template').html();
   const $newTemplate = $(`<section>${myTemplate}</section>`);
@@ -24,11 +49,12 @@ Animal.prototype.gallery = function(){
   $newTemplate.find('p').text(this.description);
   $newTemplate.find('img').attr('src',this.image);
   $newTemplate.find('img').attr('alt',this.title);
+  $newTemplate.attr('data-keyword', this.name); //Thank you Andrew!!!!
   $('main').append($newTemplate);
 }
 Animal.prototype.list = function(){
 //https://stackoverflow.com/questions/2822962/jquery-remove-duplicate-elements
-//Collabed with Tia and David
+//Collaborated with Tia and David
   let seen = {};
   $('option').each(function(){
     let txt = $(this).text();
@@ -43,10 +69,11 @@ Animal.prototype.list = function(){
 }
 
 Animal.prototype.galleryBuilder = function(){
-
-  // $('option').on('select', selectHandler)
+  console.log('selected');
+  $('option').on('select', selectHandler);
+  console.log('selected');
   // $(this).val()
-  // if val === animals.name
+  // if this.name === animals.name
 
 }
 
