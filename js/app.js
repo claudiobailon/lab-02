@@ -4,8 +4,10 @@ $.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
   .then(data => {
     data.forEach( animalObject => {
       new Animal(animalObject).gallery();
-      console.log(data);
+      new Animal(animalObject).list();
     })
+    // .then(Animals.galleryBuilder)
+    //Chance assisted with this
   })
 function Animal(object){
   this.name = object.keyword;
@@ -24,3 +26,36 @@ Animal.prototype.gallery = function(){
   $newTemplate.find('img').attr('alt',this.title);
   $('main').append($newTemplate);
 }
+Animal.prototype.list = function(){
+//https://stackoverflow.com/questions/2822962/jquery-remove-duplicate-elements
+//Collabed with Tia and David
+  let seen = {};
+  $('option').each(function(){
+    let txt = $(this).text();
+    if(seen[txt])
+      $(this).remove();
+    else
+      seen[txt] = true;
+  });
+
+  const $options = $(`<option value="${this.name}">${this.name}</option>`);
+  $('select').append($options);
+}
+
+Animal.prototype.galleryBuilder = function(){
+
+  // $('option').on('select', selectHandler)
+  // $(this).val()
+  // if val === animals.name
+
+}
+
+// function selectHandler (event){
+// };
+
+// $.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
+//   .then(data => {
+//     data.forEach( animalObject => {
+//       let
+//     })
+//   })

@@ -2,6 +2,11 @@
 
 This lab is the practice jQuery Selectors and Events
 
+Resources:
+https://stackoverflow.com/questions/2822962/jquery-remove-duplicate-elements
+
+Collabed with Tia and David 
+
 Number and name of feature: 1. Display Images
 Estimate of time needed to complete:45 Minutes
 Start time: 2:00
@@ -10,7 +15,7 @@ Actual time needed to complete: 55 minutes
 
 Number and name of feature: 2. Filter Images
 Estimate of time needed to complete:45 Minutes
-Start time:
+Start time:3:05
 Finish time
 Actual time needed to complete:
 
