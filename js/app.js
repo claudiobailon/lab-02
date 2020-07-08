@@ -15,8 +15,9 @@ $.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
         if (this.value === $(element).attr('data-keyword')){
           $(element).show();
         }
-        if (this.value === 'Filter by Keyword'){
+        else if (this.value === 'default'){
           $('section').show();
+          $('main section:first-child').css('display','none');
         }
       });
       
