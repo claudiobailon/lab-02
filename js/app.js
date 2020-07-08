@@ -6,9 +6,8 @@ $.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
     data.forEach(animalObject => {
       new Animal(animalObject).gallery();
       new Animal(animalObject).list();
-      // Animal.galleryBuilder;
     })
-    //event listener
+    //event listener for filtering
     $('select').on('change', function(){
       $('section').hide();
       $('section').each((index, element) => {
@@ -21,19 +20,10 @@ $.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
         }
       });
       
-      // data.forEach(animalObject => {
-      //   if (animalObject.val() === selectedItem)
-      // })
     });
   })
-  // Animal.galleryBuilder;
-  // .then(data => {
-  //   var animal = new Animal;
-    
-  // });
-    //Chance assisted with this
 
-// constructor function
+// constructor function builds animal obnject
 function Animal(object){
   this.name = object.keyword;
   this.image = object.image_url;
@@ -41,7 +31,7 @@ function Animal(object){
   this.hornCount = object.horns;
   this.title = object.title;
 }
-//constructor prototype
+//constructor prototype on animal object
 Animal.prototype.gallery = function(){
   const myTemplate = $('#photo-template').html();
   const $newTemplate = $(`<section>${myTemplate}</section>`);
@@ -52,6 +42,7 @@ Animal.prototype.gallery = function(){
   $newTemplate.attr('data-keyword', this.name); //Thank you Andrew!!!!
   $('main').append($newTemplate);
 }
+
 Animal.prototype.list = function(){
 //https://stackoverflow.com/questions/2822962/jquery-remove-duplicate-elements
 //Collaborated with Tia and David
@@ -67,22 +58,4 @@ Animal.prototype.list = function(){
   const $options = $(`<option value="${this.name}">${this.name}</option>`);
   $('select').append($options);
 }
-
-Animal.prototype.galleryBuilder = function(){
-  console.log('selected');
-  $('option').on('select', selectHandler);
-  console.log('selected');
-  // $(this).val()
-  // if this.name === animals.name
-
-}
-
-// function selectHandler (event){
-// };
-
-// $.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
-//   .then(data => {
-//     data.forEach( animalObject => {
-//       let
-//     })
-//   })
+// Add pagination
