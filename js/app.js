@@ -3,16 +3,13 @@
 //foreach on colllection
 let animalArray = [];
 
-$.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
+$.ajax('data/page-1.json',{method: 'GET', datatype: 'JSON' })
   .then(data => {
     data.forEach(animalObject => {
       let newHornAnimal = new Animal(animalObject);
-      // newHornAnimal.gallery();
       newHornAnimal.list();
-      newHornAnimal.class = "pageOne";
-      // animalArray.forEach(obj => {
-      //   $('main').append(obj.createHTML());
-      // })
+      newHornAnimal.class = 'pageOne';
+
     })
     //event listener for filtering
     $('select').on('change', function(){
@@ -25,20 +22,16 @@ $.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
           $('section').show();
         }
       });
-      
+
     });
   })
 
-  $.ajax('data/page-2.json',{method: "GET", datatype: "JSON" })
+$.ajax('data/page-2.json',{method: 'GET', datatype: 'JSON' })
   .then(data => {
     data.forEach(animalObject => {
       let newHornAnimal = new Animal(animalObject);
-      // newHornAnimal.galleryTwo();
       newHornAnimal.list();
-      newHornAnimal.class = "pageTwo";
-      // animalArray.forEach(obj => {
-      //   $('main').append(obj.createHTML());
-      // })
+      newHornAnimal.class = 'pageTwo';
     })
     //event listener for filtering
     $('select').on('change', function(){
@@ -51,14 +44,27 @@ $.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
           $('section').show();
         }
       });
-      
+
     });
     animalArray.forEach(obj => {
       $('main').append(obj.createHTML());
     })
     $('.pageTwo').hide();
   })
+// animalArray.sort();
+// function sortByTitle() {
+animalArray.sort((a,b) =>{
+  if(a.name.toUpperCase > b.name.toUpperCase){
+    return 1;
+  }else if(b.name.toUpperCase > a.name.toUpperCase){
+    return -1;
+  }
+  // })
+})
+console.log('animal array',animalArray);
+// function sortByHorns(){
 
+// }
 // constructor function builds animal obnject
 function Animal(object){
   this.name = object.keyword;
@@ -68,31 +74,6 @@ function Animal(object){
   this.title = object.title;
 
   animalArray.push(this);
-  console.log(animalArray);
-}
-//constructor prototype on animal object
-Animal.prototype.gallery = function(){
-  const myTemplate = $('#photo-template').html();
-  const $newTemplate = $(`<section>${myTemplate}</section>`);
-  // $newTemplate.find('h2').text(this.name);
-  // $newTemplate.find('p').text(this.description);
-  // $newTemplate.find('img').attr('src',this.image);
-  // $newTemplate.find('img').attr('alt',this.title);
-  $newTemplate.attr('data-keyword', this.name); //Thank you Andrew!!!!
-  $newTemplate.attr('class', 'pageOne')
-  $('main').append($newTemplate);
-}
-
-Animal.prototype.galleryTwo = function(){
-  const myTemplate = $('#photo-template').html();
-  const $newTemplate = $(`<section>${myTemplate}</section>`);
-  // $newTemplate.find('h2').text(this.name);
-  // $newTemplate.find('p').text(this.description);
-  // $newTemplate.find('img').attr('src',this.image);
-  // $newTemplate.find('img').attr('alt',this.title);
-  $newTemplate.attr('data-keyword', this.name); //Thank you Andrew!!!!
-  $newTemplate.attr('class', 'pageTwo')
-  $('main').append($newTemplate);
 }
 
 Animal.prototype.list = function(){
@@ -108,11 +89,9 @@ Animal.prototype.list = function(){
     let txt = $(this).text().toLocaleUpperCase();
     if(seen[txt]){
       $(this).remove();
-      // console.log('txt',txt);
     }
     else
       seen[txt] = true;
-      // console.log('seen',seen);
   });
 }
 
@@ -122,12 +101,7 @@ Animal.prototype.createHTML = function(){
   return html;
 }
 
-// animalArray.forEach(obj => {
-//   $('main').append(obj.createHTML());
-// })
 
-// Add pagination
-//for each in json add to array length
 $('#button1').on('click', function(){
   $('.pageOne').show();
   $('.pageTwo').hide();
@@ -138,7 +112,6 @@ $('#button2').on('click', function(){
   $('.pageOne').hide();
 })
 
-// refactor using mustache
 
 // refactor using flexbox
 // sort images

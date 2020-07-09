@@ -8,6 +8,8 @@ header {
 }
 main {
   overflow: hidden;
+  display:flex;
+  flex-wrap: wrap;
 }
 section {
   width: 225px;
@@ -15,4 +17,10 @@ section {
   display: inline-block;
   margin: auto 5px;
   overflow: hidden;
+}
+@media only screen and (min-width: 768px){
+  body {
+    width: 960px;
+
+  }
 }
