@@ -51,7 +51,20 @@ $.ajax('data/page-2.json',{method: 'GET', datatype: 'JSON' })
     })
     $('.pageTwo').hide();
   })
+// animalArray.sort();
+// function sortByTitle() {
+animalArray.sort((a,b) =>{
+  if(a.name.toUpperCase > b.name.toUpperCase){
+    return 1;
+  }else if(b.name.toUpperCase > a.name.toUpperCase){
+    return -1;
+  }
+  // })
+})
+console.log('animal array',animalArray);
+// function sortByHorns(){
 
+// }
 // constructor function builds animal obnject
 function Animal(object){
   this.name = object.keyword;
