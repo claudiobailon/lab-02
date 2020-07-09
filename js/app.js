@@ -1,30 +1,16 @@
 'use strict';
 //global array each animal pushed into
-//foreach on colllection
 let animalArray = [];
 
+// -------------------------------AJAX Calls----------------------------//
 $.ajax('data/page-1.json',{method: 'GET', datatype: 'JSON' })
   .then(data => {
     data.forEach(animalObject => {
       let newHornAnimal = new Animal(animalObject);
       newHornAnimal.list();
       newHornAnimal.class = 'pageOne';
-
     })
-    //event listener for filtering
-    $('select').on('change', function(){
-      $('section').hide();
-      $('section').each((index, element) => {
-        if (this.value === $(element).attr('data-keyword')){
-          $(element).show();
-        }
-        else if (this.value === 'default'){
-          $('section').show();
-        }
-      });
-
-    });
-  })
+});
 
 $.ajax('data/page-2.json',{method: 'GET', datatype: 'JSON' })
   .then(data => {
@@ -33,38 +19,44 @@ $.ajax('data/page-2.json',{method: 'GET', datatype: 'JSON' })
       newHornAnimal.list();
       newHornAnimal.class = 'pageTwo';
     })
-    //event listener for filtering
-    $('select').on('change', function(){
-      $('section').hide();
-      $('section').each((index, element) => {
-        if (this.value === $(element).attr('data-keyword')){
-          $(element).show();
-        }
-        else if (this.value === 'default'){
-          $('section').show();
-        }
-      });
-
-    });
-    animalArray.forEach(obj => {
-      $('main').append(obj.createHTML());
-    })
+    sortByTitle();
+    createElements();
     $('.pageTwo').hide();
-  })
-// animalArray.sort();
-// function sortByTitle() {
-animalArray.sort((a,b) =>{
-  if(a.name.toUpperCase > b.name.toUpperCase){
-    return 1;
-  }else if(b.name.toUpperCase > a.name.toUpperCase){
-    return -1;
-  }
-  // })
-})
-console.log('animal array',animalArray);
-// function sortByHorns(){
+});
 
-// }
+// ------------------------------- FUNCTIONS------------------------------//
+function sortByTitle(){
+  animalArray.sort(function(a, b){
+    if(a.name.toUpperCase() > b.name.toUpperCase()){
+      return 1;
+    }else if(a.name.toUpperCase() < b.name.toUpperCase()){
+      return -1;
+    }
+  });
+  console.log('animal array', animalArray);
+}
+
+function sortByHorns(){
+  animalArray.sort(function(a, b){
+    if(a.hornCount > b.hornCount){
+      return 1;
+    }else if(a.hornCount < b.hornCount){
+      return -1;
+    }
+  });
+  console.log('animal array', animalArray);
+}
+
+function createElements(){
+  animalArray.forEach(obj => {
+    $('main').append(obj.createHTML());
+  });
+}
+function clearElements(){
+  $('main').empty();
+}
+
+//-----------------------------CONSTRUCTOR-----------------------------//
 // constructor function builds animal obnject
 function Animal(object){
   this.name = object.keyword;
@@ -83,6 +75,7 @@ Animal.prototype.list = function(){
   let seen = {};
 
   const $options = $(`<option value="${this.name}">${this.name.toUpperCase()}</option>`);
+
   $('select').append($options);
 
   $('option').each(function(){
@@ -93,25 +86,45 @@ Animal.prototype.list = function(){
     else
       seen[txt] = true;
   });
-}
+};
 
 Animal.prototype.createHTML = function(){
   let template = $('#photo-template').html();
   let html = Mustache.render(template, this);
   return html;
-}
+};
 
+//---------------------------EVENT LISTENERS---------------------------//
+$('#buttonTitle').on('click', () => {
+  clearElements();
+  sortByTitle();
+  createElements();
+});
+
+$('#buttonHorns').on('click', () => {
+  clearElements();
+  sortByHorns();
+  createElements();
+});
 
 $('#button1').on('click', function(){
   $('.pageOne').show();
   $('.pageTwo').hide();
-})
+});
 
 $('#button2').on('click', function(){
   $('.pageTwo').show();
   $('.pageOne').hide();
-})
+});
 
-
-// refactor using flexbox
-// sort images
+$('select').on('change', function(){
+  $('section').hide();
+  $('section').each((index, element) => {
+    if (this.value === $(element).attr('data-keyword')){
+      $(element).show();
+    }
+    else if (this.value === 'default'){
+      $('section').show();
+    }
+  });
+});
