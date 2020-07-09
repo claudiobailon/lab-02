@@ -7,8 +7,12 @@ $.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
   .then(data => {
     data.forEach(animalObject => {
       let newHornAnimal = new Animal(animalObject);
-      newHornAnimal.gallery();
+      // newHornAnimal.gallery();
       newHornAnimal.list();
+      newHornAnimal.class = "pageOne";
+      // animalArray.forEach(obj => {
+      //   $('main').append(obj.createHTML());
+      // })
     })
     //event listener for filtering
     $('select').on('change', function(){
@@ -19,7 +23,6 @@ $.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
         }
         else if (this.value === 'default'){
           $('section').show();
-          $('main section:first-child').css('display','none');
         }
       });
       
@@ -30,8 +33,12 @@ $.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
   .then(data => {
     data.forEach(animalObject => {
       let newHornAnimal = new Animal(animalObject);
-      newHornAnimal.galleryTwo();
+      // newHornAnimal.galleryTwo();
       newHornAnimal.list();
+      newHornAnimal.class = "pageTwo";
+      // animalArray.forEach(obj => {
+      //   $('main').append(obj.createHTML());
+      // })
     })
     //event listener for filtering
     $('select').on('change', function(){
@@ -42,11 +49,13 @@ $.ajax('data/page-1.json',{method: "GET", datatype: "JSON" })
         }
         else if (this.value === 'default'){
           $('section').show();
-          $('main section:first-child').css('display','none');
         }
       });
       
     });
+    animalArray.forEach(obj => {
+      $('main').append(obj.createHTML());
+    })
     $('.pageTwo').hide();
   })
 
@@ -58,16 +67,17 @@ function Animal(object){
   this.hornCount = object.horns;
   this.title = object.title;
 
-  // animalArray.push(this);
+  animalArray.push(this);
+  console.log(animalArray);
 }
 //constructor prototype on animal object
 Animal.prototype.gallery = function(){
   const myTemplate = $('#photo-template').html();
   const $newTemplate = $(`<section>${myTemplate}</section>`);
-  $newTemplate.find('h2').text(this.name);
-  $newTemplate.find('p').text(this.description);
-  $newTemplate.find('img').attr('src',this.image);
-  $newTemplate.find('img').attr('alt',this.title);
+  // $newTemplate.find('h2').text(this.name);
+  // $newTemplate.find('p').text(this.description);
+  // $newTemplate.find('img').attr('src',this.image);
+  // $newTemplate.find('img').attr('alt',this.title);
   $newTemplate.attr('data-keyword', this.name); //Thank you Andrew!!!!
   $newTemplate.attr('class', 'pageOne')
   $('main').append($newTemplate);
@@ -76,10 +86,10 @@ Animal.prototype.gallery = function(){
 Animal.prototype.galleryTwo = function(){
   const myTemplate = $('#photo-template').html();
   const $newTemplate = $(`<section>${myTemplate}</section>`);
-  $newTemplate.find('h2').text(this.name);
-  $newTemplate.find('p').text(this.description);
-  $newTemplate.find('img').attr('src',this.image);
-  $newTemplate.find('img').attr('alt',this.title);
+  // $newTemplate.find('h2').text(this.name);
+  // $newTemplate.find('p').text(this.description);
+  // $newTemplate.find('img').attr('src',this.image);
+  // $newTemplate.find('img').attr('alt',this.title);
   $newTemplate.attr('data-keyword', this.name); //Thank you Andrew!!!!
   $newTemplate.attr('class', 'pageTwo')
   $('main').append($newTemplate);
@@ -106,6 +116,16 @@ Animal.prototype.list = function(){
   });
 }
 
+Animal.prototype.createHTML = function(){
+  let template = $('#photo-template').html();
+  let html = Mustache.render(template, this);
+  return html;
+}
+
+// animalArray.forEach(obj => {
+//   $('main').append(obj.createHTML());
+// })
+
 // Add pagination
 //for each in json add to array length
 $('#button1').on('click', function(){
@@ -119,5 +139,6 @@ $('#button2').on('click', function(){
 })
 
 // refactor using mustache
+
 // refactor using flexbox
 // sort images
