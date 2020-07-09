@@ -5,6 +5,7 @@ body {
 }
 header {
   height: 150px;
+  padding-top: 40px;
 }
 main {
   overflow: hidden;
@@ -18,9 +19,28 @@ section {
   margin: auto 5px;
   overflow: hidden;
 }
+
 @media only screen and (min-width: 768px){
   body {
+    width: 768px;
+    margin: auto;
+  }
+  main {
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 225px 225px 225px;
+    grid-template-rows: 320px auto;
+  }
+}
+@media only screen and (min-width: 960px){
+  body {
     width: 960px;
-
+    margin: 10px auto;
+  }
+  main {
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 225px 225px 225px 225px;
+    grid-template-rows: 320px auto;
   }
 }

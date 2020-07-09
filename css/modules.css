@@ -2,7 +2,8 @@ body {
   background-color: lightgray;
 }
 header h1 {
-  font-size: 2em;
+  font-size: 2.4em;
+  margin: 20px 0;
 }
 section h2 {
   margin: 0 0 20px;

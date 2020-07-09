@@ -53,15 +53,17 @@ $.ajax('data/page-2.json',{method: 'GET', datatype: 'JSON' })
   })
 // animalArray.sort();
 // function sortByTitle() {
-animalArray.sort((a,b) =>{
-  if(a.name.toUpperCase > b.name.toUpperCase){
-    return 1;
-  }else if(b.name.toUpperCase > a.name.toUpperCase){
-    return -1;
-  }
-  // })
-})
-console.log('animal array',animalArray);
+  $('#buttonTitle').on('click', () => {
+    animalArray.sort(function(a, b){
+      if(a.name.toUpperCase > b.name.toUpperCase){
+        return 1;
+      }else if(a.name.toUpperCase < b.name.toUpperCase){
+        return -1;
+      }
+      // })
+    })
+    console.log('animal array',animalArray);
+  })
 // function sortByHorns(){
 
 // }
@@ -73,7 +75,7 @@ function Animal(object){
   this.hornCount = object.horns;
   this.title = object.title;
 
-  animalArray.push(this);
+  animalArray.push(this); 
 }
 
 Animal.prototype.list = function(){
